@@ -1,0 +1,391 @@
+/* ============================================
+   IMT GROUP - GLOBAL DESIGN SYSTEM
+   Key Color : #FF6B00 (Vivid Orange)
+   Sub Color : #1A2238 (Deep Navy)
+============================================ */
+
+:root{
+    --orange:#FF6B00;
+    --orange-soft:#FF8A33;
+    --navy:#0B1020;
+    --navy-2:#1A2238;
+    --navy-3:#222B45;
+    --line:rgba(255,255,255,.08);
+    --text:#E8ECF4;
+    --text-mute:#9AA3B7;
+    --gold:#C9A77A;
+    --radius:14px;
+    --container:1280px;
+    --easing:cubic-bezier(.22,1,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    font-family:'Pretendard','Inter','Noto Sans KR',system-ui,-apple-system,sans-serif;
+    background:var(--navy);
+    color:var(--text);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;transition:color .25s var(--easing)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ===== NOISE / GRID OVERLAY ===== */
+body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;
+    z-index:1;
+}
+
+/* ===== CONTAINER ===== */
+.container{max-width:var(--container);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+/* ===== HEADER / GNB ===== */
+.gnb{
+    position:fixed;top:0;left:0;right:0;
+    z-index:100;
+    padding:10px 0;
+    background:rgba(11,16,32,.6);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+    transition:padding .3s var(--easing), background .3s var(--easing);
+}
+.gnb.scrolled{padding:6px 0;background:rgba(11,16,32,.92)}
+.gnb-inner{display:flex;align-items:center;justify-content:space-between}
+.logo{
+    display:flex;align-items:center;gap:10px;
+    font-weight:800;font-size:22px;letter-spacing:.5px;
+    transition:transform .3s var(--easing), filter .3s var(--easing);
+}
+.logo:hover{transform:translateY(-1px);filter:drop-shadow(0 6px 16px rgba(255,107,0,.25))}
+.logo-img{
+    height:92px;width:auto;display:block;
+    object-fit:contain;
+    /* 다크 배경에서 텍스트 가독성을 위한 필터 부스트 */
+    filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));
+    transition:height .3s var(--easing);
+}
+.gnb.scrolled .logo-img{height:80px}
+.footer-logo-img{height:108px;margin-bottom:8px}
+
+/* Legacy mark/text fallback (보존용) */
+.logo-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:linear-gradient(135deg,var(--orange),#FF3D00);
+    display:grid;place-items:center;
+    color:#fff;font-weight:900;font-size:16px;
+    box-shadow:0 8px 24px rgba(255,107,0,.35);
+}
+.logo-text span{color:var(--orange)}
+
+@media (max-width:560px){
+    .logo-img{height:76px}
+    .gnb.scrolled .logo-img{height:68px}
+    .footer-logo-img{height:92px}
+}
+
+.nav-menu{display:flex;align-items:center;gap:40px;list-style:none}
+.nav-item{position:relative}
+.nav-link{
+    font-size:15px;font-weight:600;letter-spacing:.3px;
+    padding:8px 0;display:inline-block;
+    color:var(--text);
+}
+.nav-link:hover{color:var(--orange)}
+.nav-dropdown{
+    position:absolute;top:100%;left:50%;
+    transform:translateX(-50%) translateY(10px);
+    min-width:260px;
+    background:rgba(20,26,48,.98);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+    opacity:0;visibility:hidden;
+    transition:all .3s var(--easing);
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.nav-item:hover .nav-dropdown{
+    opacity:1;visibility:visible;
+    transform:translateX(-50%) translateY(0);
+}
+.nav-dropdown a{
+    display:block;padding:11px 14px;
+    border-radius:8px;font-size:14px;
+    color:var(--text-mute);
+    transition:all .2s var(--easing);
+}
+.nav-dropdown a:hover{background:rgba(255,107,0,.1);color:var(--orange);padding-left:18px}
+
+.gnb-cta{
+    background:var(--orange);
+    color:#fff;padding:10px 22px;
+    border-radius:50px;font-weight:700;font-size:14px;
+    transition:all .25s var(--easing);
+    box-shadow:0 6px 20px rgba(255,107,0,.35);
+}
+.gnb-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,107,0,.5);color:#fff}
+
+.menu-toggle{display:none;font-size:24px}
+
+/* ===== HERO COMMON ===== */
+.hero{
+    min-height:90vh;
+    position:relative;
+    display:flex;align-items:center;
+    padding:140px 0 80px;
+    overflow:hidden;
+}
+.hero-bg{
+    position:absolute;inset:0;z-index:1;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,107,0,.18), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(26,34,56,.6), transparent 60%),
+        linear-gradient(135deg,#0B1020 0%,#1A2238 100%);
+}
+.hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 39h40M39 0v40' stroke='%23ffffff05' fill='none'/%3E%3C/svg%3E");
+}
+.hero-content{position:relative;z-index:3;max-width:900px}
+.hero-eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 16px;
+    border:1px solid var(--orange);
+    border-radius:50px;
+    color:var(--orange);
+    font-size:12px;font-weight:700;letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:28px;
+}
+.hero-eyebrow::before{
+    content:"";width:6px;height:6px;border-radius:50%;
+    background:var(--orange);
+    animation:pulse 1.8s infinite;
+}
+@keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.4;transform:scale(1.4)}
+}
+.hero h1{
+    font-size:clamp(36px,5.4vw,72px);
+    line-height:1.12;
+    font-weight:800;
+    letter-spacing:-1.5px;
+    margin-bottom:24px;
+}
+.hero h1 .accent{
+    background:linear-gradient(135deg,var(--orange),#FFB347);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+.hero p.lead{
+    font-size:clamp(15px,1.4vw,18px);
+    color:var(--text-mute);
+    max-width:640px;
+    margin-bottom:40px;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 32px;
+    border-radius:50px;
+    font-weight:700;font-size:15px;letter-spacing:.3px;
+    transition:all .3s var(--easing);
+    cursor:pointer;
+}
+.btn-primary{
+    background:var(--orange);color:#fff;
+    box-shadow:0 10px 30px rgba(255,107,0,.4);
+}
+.btn-primary:hover{
+    background:#ff7d1f;transform:translateY(-3px);
+    box-shadow:0 16px 40px rgba(255,107,0,.55);
+    color:#fff;
+}
+.btn-ghost{
+    background:transparent;color:var(--text);
+    border:1px solid rgba(255,255,255,.2);
+}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+.btn .arrow{transition:transform .3s var(--easing)}
+.btn:hover .arrow{transform:translateX(5px)}
+
+/* ===== SECTION COMMON ===== */
+.section{padding:120px 0;position:relative}
+.section-head{margin-bottom:64px;max-width:780px}
+.section-tag{
+    color:var(--orange);font-size:13px;font-weight:700;
+    letter-spacing:3px;text-transform:uppercase;
+    margin-bottom:16px;display:block;
+}
+.section-title{
+    font-size:clamp(30px,3.6vw,48px);
+    font-weight:800;line-height:1.2;
+    letter-spacing:-1px;margin-bottom:18px;
+}
+.section-desc{color:var(--text-mute);font-size:17px}
+
+/* ===== FOOTER ===== */
+.footer{
+    background:#06090F;
+    border-top:1px solid var(--line);
+    padding:80px 0 40px;
+    position:relative;z-index:2;
+}
+.footer-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:48px;margin-bottom:60px;
+}
+.footer h4{
+    font-size:13px;font-weight:700;letter-spacing:2px;
+    color:var(--orange);text-transform:uppercase;
+    margin-bottom:20px;
+}
+.footer ul{list-style:none}
+.footer li{margin-bottom:10px}
+.footer a{color:var(--text-mute);font-size:14px}
+.footer a:hover{color:var(--orange)}
+.footer-brand p{color:var(--text-mute);font-size:14px;margin-top:14px;line-height:1.7}
+.footer-bottom{
+    border-top:1px solid var(--line);
+    padding-top:30px;
+    display:flex;justify-content:space-between;
+    color:var(--text-mute);font-size:13px;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up{opacity:0;transform:translateY(40px);transition:all .9s var(--easing)}
+.fade-up.in{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:960px){
+    .menu-toggle{
+        display:block;
+        position:relative;z-index:120;
+        font-size:24px;color:var(--text);
+        width:44px;height:44px;border-radius:10px;
+        background:rgba(255,255,255,.06);
+        border:1px solid var(--line);
+        transition:all .25s var(--easing);
+    }
+    .menu-toggle:hover{background:rgba(255,107,0,.15);border-color:var(--orange);color:var(--orange)}
+
+    /* 기본 상태: 햄버거 닫혀있을 때는 메뉴 완전히 숨김 */
+    .nav-menu{
+        position:fixed;
+        top:0;left:0;right:0;
+        flex-direction:column;align-items:stretch;
+        background:rgba(11,16,32,.98);
+        backdrop-filter:blur(24px);
+        -webkit-backdrop-filter:blur(24px);
+        padding:90px 24px 28px;
+        gap:0;
+        overflow:visible;
+        /* 햄버거 클릭 전에는 비활성화 */
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transform:translateY(-20px);
+        transition:opacity .35s var(--easing), transform .35s var(--easing), visibility 0s linear .35s;
+        z-index:110;
+    }
+    /* 햄버거 클릭 시에만 노출 */
+    .nav-menu.open{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transform:translateY(0);
+        transition:opacity .35s var(--easing), transform .35s var(--easing), visibility 0s linear 0s;
+    }
+
+    .nav-item{border-bottom:1px solid var(--line)}
+    .nav-item:last-child{border-bottom:none}
+    .nav-link{
+        padding:14px 4px;width:100%;
+        font-size:16px;font-weight:700;
+        display:flex;justify-content:space-between;align-items:center;
+    }
+    .nav-link i{display:none !important}
+    /* 데스크탑 절대위치/transform 완전 무력화 → 모바일에서 풀 펼침 */
+    .nav-dropdown,
+    .nav-item:hover .nav-dropdown{
+        position:static !important;
+        top:auto !important;
+        left:auto !important;
+        right:auto !important;
+        transform:none !important;
+        translate:none !important;
+        opacity:1 !important;
+        visibility:visible !important;
+        background:transparent !important;
+        border:none !important;
+        box-shadow:none !important;
+        padding:0 0 10px 12px !important;
+        min-width:0 !important;
+        width:100% !important;
+        display:block !important;
+        max-height:none !important;
+        overflow:visible !important;
+    }
+    /* 드롭다운 항목 - 기본 상태 */
+    .nav-dropdown a{
+        display:block !important;
+        font-size:14px;
+        padding:8px 12px !important;
+        margin:0 !important;
+        color:var(--text-mute);
+        transform:none !important;
+        translate:none !important;
+        transition:background-color .2s var(--easing), color .2s var(--easing) !important;
+    }
+    /* 드롭다운 항목 - 호버/터치/포커스 시 위치 완전 고정 */
+    .nav-dropdown a:hover,
+    .nav-dropdown a:active,
+    .nav-dropdown a:focus,
+    .nav-dropdown a:focus-visible{
+        padding:8px 12px !important;
+        margin:0 !important;
+        transform:none !important;
+        translate:none !important;
+        background:rgba(255,107,0,.1);
+        color:var(--orange);
+    }
+    /* 메인 메뉴 링크도 위치 고정 */
+    .nav-link,
+    .nav-link:hover,
+    .nav-link:active,
+    .nav-link:focus,
+    .nav-link:focus-visible{
+        padding:14px 4px !important;
+        margin:0 !important;
+        transform:none !important;
+        translate:none !important;
+        color:var(--text);
+    }
+    .nav-link:hover{color:var(--orange) !important}
+
+    .gnb-cta{display:none}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .section{padding:80px 0}
+    .container{padding:0 22px}
+
+    /* 메뉴 열렸을 때 body 스크롤 잠금 */
+    body.menu-open{overflow:hidden}
+}
+@media (max-width:560px){
+    .footer-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;gap:8px}
+}
